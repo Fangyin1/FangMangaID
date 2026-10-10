@@ -26,7 +26,7 @@ module.exports = async function handler(req, res) {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
-        'User-Agent': 'FangManga/1.0 (MangaDex API proxy)'
+        'User-Agent': 'FangMangaID/1.0 (MangaDex API proxy)'
       }
     });
     const body = await upstream.text();
