@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>FangManga Baca Manga</title>
+  <meta name="theme-color" content="#0b0b0b">
+
+  <link rel="icon" href="assets/favicon.gif" type="image/gif">
+  <link rel="stylesheet" href="style.css">
+
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+  <header class="topbar">
+    <a class="brand" href="#home" aria-label="FangManga Home">
+      <img
+        src="assets/logo.png"
+        alt="FangManga Logo"
+        class="brand-logo"
+      >
+    </a>
+
+    <nav>
+      <a href="#home">HOME</a>
+      <a href="#latest">TERBARU</a>
+      <a href="#popular">POPULER</a>
+      <a href="#continue">LANJUT BACA</a>
+      <a href="#profile">PROFIL</a>
+    </nav>
+
+    <div class="actions">
+      <button id="themeBtn" aria-label="Ganti tema">☾</button>
+      <button id="menuBtn" onclick="location.href='#popular'">MENU</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div>
+        <p class="eyebrow">MANGA READER / 2026</p>
+
+        <h1>
+          FANG<br>
+          <em>MANGA</em><br>
+          26
+        </h1>
+
+        <p class="hero-copy">
+          BACA MANGA DISINI TANPA ADA IKLAN
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn dark" href="#latest">Mulai baca ↗</a>
+          <button class="btn" id="openSearch">Cari manga</button>
+        </div>
+      </div>
+
+      <!-- BANNER GIF FANGMANGA -->
+      <div class="hero-card">
+        <img
+          src="assets/banner-fangmanga.gif"
+          alt="Banner FangManga hitam putih"
+          class="hero-banner-logo"
+        >
+      </div>
+    </section>
+
+    <section class="section" id="popular">
+      <div class="section-head">
+        <span>01 / MANGA POPULER</span>
+        <span id="slideCounter">AUTO SLIDE</span>
+      </div>
+
+      <div class="popular-banner" id="popularBanner">
+        <button
+          class="banner-arrow left"
+          id="bannerPrev"
+          aria-label="Banner sebelumnya"
+        >‹</button>
+
+        <div id="bannerContent" class="banner-content">
+          <div class="empty">Memuat manga populer...</div>
+        </div>
+
+        <button
+          class="banner-arrow right"
+          id="bannerNext"
+          aria-label="Banner berikutnya"
+        >›</button>
+
+        <div id="bannerDots" class="banner-dots"></div>
+      </div>
+    </section>
+
+    <section class="section" id="continue">
+      <div class="section-head">
+        <span>02 / LANJUTKAN MEMBACA</span>
+        <span>RIWAYAT PERANGKAT</span>
+      </div>
+
+      <div id="continueGrid" class="manga-grid">
+        <div class="empty">Belum ada riwayat bacaan.</div>
+      </div>
+    </section>
+
+    <section class="section" id="latest">
+      <div class="section-head">
+        <span>03 / TERBARU</span>
+        <span id="countText">0 MANGA</span>
+      </div>
+
+      <div id="latestGrid" class="manga-grid">
+        <div class="empty">Belum ada manga. Tambahkan dari Admin.</div>
+      </div>
+    </section>
+
+    <section class="section" id="all">
+      <div class="section-head">
+        <span>04 / SEMUA KONTEN</span>
+
+        <div class="search">
+          <input
+            id="searchInput"
+            placeholder="Cari judul..."
+            autocomplete="off"
+          >
+          <button id="searchBtn" aria-label="Cari">⌕</button>
+        </div>
+      </div>
+
+      <div class="catalog-filters">
+        <select id="typeFilter" aria-label="Jenis konten"><option value="all">Semua jenis</option><option value="manga">Manga</option><option value="manhwa">Manhwa</option></select>
+        <select id="genreFilter" aria-label="Filter genre"><option value="all">Semua genre</option></select>
+        <select id="statusFilter" aria-label="Filter status"><option value="all">Semua status</option><option value="ongoing">Ongoing</option><option value="completed">Tamat</option><option value="hiatus">Hiatus</option></select>
+        <select id="sortFilter" aria-label="Urutkan"><option value="latest">Terbaru</option><option value="popular">Populer</option><option value="rating">Rating tertinggi</option><option value="title">Judul A–Z</option></select>
+      </div>
+      <div id="allGrid" class="manga-grid">
+        <div class="empty">Memuat...</div>
+      </div>
+    </section>
+
+    <section class="section profile-section" id="profile">
+      <div class="section-head">
+        <span>05 / PROFIL</span>
+        <span>CONTACT</span>
+      </div>
+
+      <div class="profile-box">
+        <div class="avatar">F</div>
+
+        <div>
+          <p class="eyebrow">ADMIN / FANG</p>
+          <h2>Fang</h2>
+
+          <p>
+            Kalau ada manga yang error, gambar rusak, atau chapter
+            bermasalah, hubungi aku lewat Telegram
+          </p>
+
+          <div class="links">
+            <a id="telegramBtn" href="#" target="_blank" rel="noopener">
+              Telegram ↗
+            </a>
+
+            <a id="channelBtn" href="#" target="_blank" rel="noopener">
+              Channel ↗
+            </a>
+
+            <a href="mailto:" id="emailBtn">Email ↗</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>FANGMANGA</span>
+    <span>FANG SOL9</span>
+  </footer>
+
+  <dialog id="searchDialog">
+    <form method="dialog">
+      <div class="dialog-head">
+        <b>CARI MANGA</b>
+        <button aria-label="Tutup">×</button>
+      </div>
+
+      <input id="dialogSearch" placeholder="Judul manga...">
+      <div id="dialogResults"></div>
+    </form>
+  </dialog>
+
+  <script src="script.js"></script>
+
+  <!-- Gaya banner GIF -->
+  <style>
+    .hero-card {
+      overflow: hidden;
+      min-width: 0;
+    }
+
+    .hero-banner-logo {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .brand-logo {
+      display: block;
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
+    }
+  </style>
+</body>
+</html>
